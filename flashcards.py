@@ -83,8 +83,7 @@ def flashcards():
     review = [i for i in random.sample(list(cards), 10)]
     total = {}
     for i in review:
-        loop = 1
-        while loop:
+        while True:
             print('\n\t\t*****  %s  *****' % i)
             first = int(input('\tCan you pronounce %s? 1 or 0' % i))
             second = int(input('\tDo you know the meaning of %s? 1 or 0' % i))

@@ -5,6 +5,7 @@ import jieba
 import PyPDF2
 import re
 import random
+import os.path
 
 # Load json database of words: score from scrape.json
 # Add new words from text-files or (to do) PDFs
@@ -83,8 +84,8 @@ def flashcards():
     for i in review:
         while True:
             print('\n\t\t*****  %s  *****' % i)
-            first = int(input('\tCan you pronounce %s? 1 or 0' % i))
-            second = int(input('\tDo you know the meaning of %s? 1 or 0' % i))
+            first = int(input('\tCan you pronounce %s? 1 or 0\n>' % i))
+            second = int(input('\tDo you know the meaning of %s? 1 or 0\n>' % i))
             if type(first) != int or type(second) != int:
                 print('\n\tIncorrect Input')
             else:
@@ -119,11 +120,11 @@ def main():
     elif inputF == "C":
         clearup()
     for i in input_x:
-        if not i.lower().endswith(('.pdf', '.txt')) and len(i) > 1:
+        if (not os.path.isfile(i)):
             print('\n\t"%s" is not a valid filename\n' % i)
         elif i.lower().endswith('.pdf'):
             load_chars_pdf(i)
-        elif inputF.lower().endswith('.txt'):
+        else:
             load_chars(i)
     main()
 

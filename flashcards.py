@@ -6,11 +6,9 @@ import PyPDF2
 import re
 import random
 
-# 1. Create a SET of words I know (no %)
-# 2. For new pdfs/docs, check if any words already in SET
-# 3. If not, add to unknown words dict
-# 4. Flashcards - go over words,
-# 5. If correct rate above 75% over 30 tries, remove from dict
+# Load json database of words: score from scrape.json
+# Add new words from text-files or (to do) PDFs
+# Review words with less than 1.00 score in flashcard function
 
 
 def update(words):

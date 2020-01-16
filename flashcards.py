@@ -26,7 +26,7 @@ def update(words):
                 test[i] += j
     with open('scrape.json','w',encoding='utf-8') as fp:
         json.dump(test, fp, ensure_ascii=False)
-    print(f'Successfully updated %s' % words)
+    print(f'Successfully updated: %s' % words)
 
 
 def load_all():
@@ -73,7 +73,7 @@ def clearup():
         del test[key]
     with open('scrape.json','w',encoding='utf-8') as fp:
         json.dump(test, fp, ensure_ascii=False)
-    print('Successfully cleared up: %d' % len(to_delete))
+    print('Successfully cleared up %d cards' % len(to_delete))
 
 
 def flashcards():
@@ -105,27 +105,31 @@ def flashcards():
 
 
 def main():
-    inputF = input('\n\tEnter files to scan (PDF or text file), separated by commas'
+    inputF = input('\n\tType "L" to scan files for new words'
                    '\n\tOr "Q" to quit\n\tType "P" to print the database'
                    '\n\tOr "F" for flashcards'
                    '\n\tOr "C" to clear-up \n> ')
-    input_x = inputF.split()
     if inputF == 'Q':
         print('Goodbye///')
         quit()
     elif inputF == 'P':
-        print(load_all())
+        to_print = load_all()
+        print('Total %s words' % len(to_print))
+        print(to_print)
     elif inputF == "F":
         flashcards()
     elif inputF == "C":
         clearup()
-    for i in input_x:
-        if (not os.path.isfile(i)):
-            print('\n\t"%s" is not a valid filename\n' % i)
-        elif i.lower().endswith('.pdf'):
-            load_chars_pdf(i)
-        else:
-            load_chars(i)
+    elif inputF == "L":
+        inputL = input('\n\tEnter each filename separated (no commas)\n> ')
+        input_x = inputL.split()
+        for i in input_x:
+            if (not os.path.isfile(i)):
+                print('\n\t"%s" is not a valid filename\n' % i)
+            elif i.lower().endswith('.pdf'):
+                load_chars_pdf(i)
+            else:
+                load_chars(i)
     main()
 
 
